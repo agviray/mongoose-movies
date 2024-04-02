@@ -3,8 +3,22 @@ const Movie = require('../models/movie');
 
 module.exports = {
   new: newPerformer,
-  create
+  create,
+  addToCast
 };
+
+
+async function addToCast(req, res) {
+  // 1) find the movie we are associating a performer to
+  const movie = await Movie.findById(req.params.id);
+  // 2) push the object id from the form into the cast array
+  movie.cast.push(req.body.performerId);
+  // 3) save the movie document
+  await movie.save();
+  // 4) redirect to the show page
+  res.redirect(`/movies/${movie._id}`);
+}
+
 
 async function newPerformer(req, res) {
   //Sort performers by their name
