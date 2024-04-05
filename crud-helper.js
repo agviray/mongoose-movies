@@ -12,11 +12,10 @@
 //   3. When done CRUDing, exit the REPL with:
 //         $ .exit (or ctrl-D, or ctrl-C twice)
 
-// If any changes are made to the models, 
+// If any changes are made to the models,
 // exit the REPL and reload this module
 
-
-// If the db connection string is in a .env file, we need 
+// If the db connection string is in a .env file, we need
 // to read in those env variables just like in server.js
 require('dotenv').config();
 // Connect to the database
@@ -33,5 +32,7 @@ const Performer = require('./models/performer');
 // Movie.find({}).then(movies => console.log(movies));
 
 // Check all performer documents
-Performer.find({}).then(performers => console.log(performers));
+Performer.find({}).then((performers) => console.log(performers));
 
+// Clear out reviews.
+Movie.updateMany({}, { reviews: [] }).then(console.log);
